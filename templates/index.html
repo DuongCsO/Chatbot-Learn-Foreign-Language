@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script>
+        var input_languages_codes_and_names = {{ input_languages_codes_and_names | tojson }};
+        var output_languages_locales_and_names = {{ output_languages_locales_and_names | tojson }};
+    </script>
+</head>
+<body>
+    <div id="phone-wrapper">
+		<div id="app">
+			<div id="landing" class="bg-dark text-light" style="">
+				<span class="fas fa-robot fa-4x"></span>
+				<div>
+					<h1 class="mt-3">ChatBot</h1>
+				</div>
+				<form id="form-start">
+                    <input type="text" name="username" id="username" value="" placeholder="Your name" required>
+                    <div id="gender-form" style="display: inline-block">
+                        <input class="gender-check-input" type="radio" name="gender" id="female" value="Female" checked>
+                        <label class="gender-check-input" for="female">Female</label>
+                        <input class="gender-check-input" type="radio" name="gender" id="male" value="Male">
+                        <label class="gender-check-input" for="male">Male</label>
+                    </div></br>
+                    <label for="user-lang-dropdown" class="form-label">Your speak</label>
+                    <select class="form-select" id="user-lang-dropdown" name="user-lang-dropdown" required>
+                        <option selected disabled value="">Choose...</option>
+                    </select>
+                    <label for="tutor-lang-dropdown" class="form-label">Your tutor speaks</label>
+                    <select class="form-select" id="tutor-lang-dropdown" name="tutor-lang-dropdown" required>
+                        <option selected disabled value="">Choose...</option>
+                    </select>
+					<label for="lang-level" class="form-label">Your language level</label>
+                    <select class="form-select" id="lang-level" name="lang-level" required>
+                        <option selected value="A1">Beginners</option>
+                        <option value="A2">Pre-Intermediate</option>
+                        <option value="B1">Intermediate</option>
+                        <option value="B2">Upper-Intermediate</option>
+                        <option value="C1">Advanced</option>
+                        <option value="C2">Proficiency</option>
+                    </select>
+					<button type="submit" id="start-chat">Start chat</button>
+				</form>
+			</div>
+			<div id="header" class="bg-dark">
+				<div><button id="back-button" class="text-light btn-transparent btn-icon fas fa-arrow-left"></button></div>
+				<div class="text-light align-center">
+					<h2>ChatBot</h2>
+				</div>
+				<div>
+					<button id="nav-icon" class="text-light btn-transparent btn-icon fas fa-bars"></button>
+					<nav id="nav-container" style="display: none;">
+						<ul class="nav">
+							<li id="search" class="nav-link"><span class="fas fa-search"></span>Search</li>
+							<li id="clear-history" class="nav-link"><span class="fas fa-trash-alt"></span>Clear history</li>
+							<li id="theme" class="nav-link"><span class="fas fa-cogs"></span>Settings</li>
+							<hr>
+							<li id="sign-out" class="nav-link"><span class="fas fa-sign-out-alt"></span>Sign out</li>
+						</ul>
+					</nav>
+				</div>
+			</div>
+			<div id="message-board">
+
+
+			</div>
+			<div id="form" class="bg-light">
+				<div id="emoijis" style="display: none;">
+					<button class="smiley btn-transparent btn-icon"><span class="far fa-grin-beam"></span></button>
+					<button class="smiley btn-transparent btn-icon"><span class="far fa-grin"></span></button>
+					<button class="smiley btn-transparent btn-icon"><span class="far fa-grin-wink"></span></button>
+					<button class="smiley btn-transparent btn-icon"><span class="far fa-grin-tongue"></span></button>
+					<button class="smiley btn-transparent btn-icon"><span class="far fa-grin-tongue-wink"></span></button>
+					<button class="smiley btn-transparent btn-icon"><span class="far fa-kiss-wink-heart"></span></button>
+					<button class="smiley btn-transparent btn-icon"><span class="far fa-grin-hearts"></span></button>
+					<button class="smiley btn-transparent btn-icon"><span class="far fa-surprise"></span></button>
+					<button class="smiley btn-transparent btn-icon"><span class="far fa-angry"></span></button>
+					<button class="smiley btn-transparent btn-icon"><span class="far fa-tired"></span></button>
+					<button class="smiley btn-transparent btn-icon"><span class="far fa-sad-tear"></span></button>
+					<button class="smiley btn-transparent btn-icon"><span class="far fa-grin-squint-tears"></span></button>
+					<button class="smiley btn-transparent btn-icon"><span class="far fa-sad-cry"></span></button>
+					<button class="smiley btn-transparent btn-icon"><span class="far fa-dizzy"></span></button>
+				</div>
+				<div><button id="emoi" class="btn-transparent btn-icon far fa-grin"></button></div>
+				<div id="message" placeholder="Type your message here" rows="1" contenteditable></div>
+				<div style="display: flex; align-items: center;">
+                    <button type="button" id="record-button" class="btn btn-secondary off" name="record" title="Record Message [Alt+R]">
+                        <i class="fas fa-microphone" id="record-icon"></i>
+                    </button>
+                    <button id="send" type="" class="btn-transparent btn-icon fas fa-paper-plane"></button>
+                </div>
+                <div id="notification-area"></div>
+			</div>
+		</div>
+	</div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>

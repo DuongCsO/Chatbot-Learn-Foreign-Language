@@ -1,0 +1,13 @@
+behavior:
+  auto_send_recording: false
+bot:
+  name: Alex
+language:
+  learning: en
+  level: A1
+  native: vi
+openai:
+  api_key: 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
+user:
+  gender: Female
+  name: Duong
