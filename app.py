@@ -56,11 +56,7 @@ def home():
             },
             "behavior": {
                 "auto_send_recording": bool(request.form.get('auto-send-switch'))
-            },
-            "openai": {
-                "api_key": "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"
             }
-            #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 key cũ
         }
         with open(os.path.join(os.getcwd(), filename), 'w') as outfile:
             yaml.dump(data, outfile, allow_unicode=True)

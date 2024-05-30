@@ -6,6 +6,10 @@ from python.memory import Memory
 from python.config import Config
 from python.language import iso6391_to_language_name
 import requests
+import os
+
+
+RAPID_KEY= os.getenv("RAPID_KEY")
 
 
 SYSTEM_PROMPT = """You are a {language} teacher named {teacher_name}, and you are a male. You are on a 1-on-1 
@@ -67,33 +71,19 @@ class Chatbot:
             history[-1]["content"] += dedent(TUTOR_INSTRUCTIONS.format(
                 language=iso6391_to_language_name(self._language))
             )
-        # url = "https://chat-gpt26.p.rapidapi.com/"
-        # url = "https://chatgpt-api8.p.rapidapi.com/"
-        url = "https://chatgpt-42.p.rapidapi.com/conversationgpt4-2"
+        url = "https://chatgpt-42.p.rapidapi.com/conversationgpt4"
         payload = {"messages": history,
-                   "system_prompt": "",
                         "temperature": 0.9,
                         "top_k": 5,
                         "top_p": 0.9,
-                        "max_tokens": 256,
+                        "max_tokens": 100,
                         "web_access": False}
-        # headers = {
-        #     "content-type": "application/json",
-        #     "Content-Type": "application/json",
-        #     "X-RapidAPI-Key": "d4dfff94e5msha50c864b4ea5a16p1040b2jsn372c5801ef89",
-        #     "X-RapidAPI-Host": "chat-gpt26.p.rapidapi.com"
-        # }
-        # headers = {
-        #     "content-type": "application/json",
-        #     "X-RapidAPI-Key": "d4dfff94e5msha50c864b4ea5a16p1040b2jsn372c5801ef89",
-        #     "X-RapidAPI-Host": "chatgpt-api8.p.rapidapi.com"
-        # }
         headers = {
             "content-type": "application/json",
-            "X-RapidAPI-Key": "d4dfff94e5msha50c864b4ea5a16p1040b2jsn372c5801ef89",
+            "X-RapidAPI-Key": RAPID_KEY,
             "X-RapidAPI-Host": "chatgpt-42.p.rapidapi.com"
         }
-
         response = requests.post(url, json=payload, headers=headers)
+        print(response)
         # return response.json()['choices'][0]['message']['content']
         return response.json()["result"]

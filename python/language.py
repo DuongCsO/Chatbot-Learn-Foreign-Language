@@ -1,5 +1,9 @@
 import requests
 from langcodes import Language, find
+import os
+
+
+RAPID_KEY= os.getenv("RAPID_KEY")
 
 
 def translate(text: str, detected_language: str, translated_language: str) -> str:
@@ -11,7 +15,7 @@ def translate(text: str, detected_language: str, translated_language: str) -> st
     }
     headers = {
         "content-type": "application/json",
-        "X-RapidAPI-Key": "d4dfff94e5msha50c864b4ea5a16p1040b2jsn372c5801ef89",
+        "X-RapidAPI-Key": RAPID_KEY,
         "X-RapidAPI-Host": "google-api31.p.rapidapi.com"
     }
     response = requests.post(url, json=payload, headers=headers)
@@ -26,7 +30,7 @@ def translate2(text:str, detected_language: str, translated_language: str)->str:
     payload = [{"Text": text}]
     headers = {
         "content-type": "application/json",
-        "X-RapidAPI-Key": "d4dfff94e5msha50c864b4ea5a16p1040b2jsn372c5801ef89",
+        "X-RapidAPI-Key": RAPID_KEY,
         "X-RapidAPI-Host": "microsoft-translator-text.p.rapidapi.com"
     }
     response = requests.post(url, json=payload, headers=headers, params=querystring)

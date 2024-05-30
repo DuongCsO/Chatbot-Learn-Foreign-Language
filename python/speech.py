@@ -2,6 +2,9 @@ import requests
 import os
 from requests import post
 
+RAPID_KEY= os.getenv("RAPID_KEY")
+TEXT_TO_SPEECH_KEY= os.getenv("TEXT_TO_SPEECH_KEY")
+
 # api_key_text_to_speech='85a038085cb74ee9a56461fbef691977'
 def text_to_speech(language: str, text: str, filename: str) -> str:
     """
@@ -23,7 +26,7 @@ def text_to_speech(language: str, text: str, filename: str) -> str:
     # Define the base URL for the custom text-to-speech API
     url = "https://voicerss-text-to-speech.p.rapidapi.com/"
     # Set query parameters (in this case, just the API key)
-    querystring = {"key": '85a038085cb74ee9a56461fbef691977'}
+    querystring = {"key": TEXT_TO_SPEECH_KEY}
     # Payload containing the text and other options for text-to-speech
     payload = {
         "src": text,
@@ -35,7 +38,7 @@ def text_to_speech(language: str, text: str, filename: str) -> str:
     # Headers required for the API request
     headers = {
         "content-type": "application/x-www-form-urlencoded",
-        "X-RapidAPI-Key": "d4dfff94e5msha50c864b4ea5a16p1040b2jsn372c5801ef89",
+        "X-RapidAPI-Key": RAPID_KEY,
         "X-RapidAPI-Host": "voicerss-text-to-speech.p.rapidapi.com"
     }
     # Make a POST request to the custom text-to-speech API
@@ -53,7 +56,7 @@ def speech_to_text(filename: str) -> str:
         files = {"file": f.read()}
     url = "https://chatgpt-42.p.rapidapi.com/whisperv3"
     headers = {
-        "X-RapidAPI-Key": "d4dfff94e5msha50c864b4ea5a16p1040b2jsn372c5801ef89",
+        "X-RapidAPI-Key": RAPID_KEY,
         "X-RapidAPI-Host": "chatgpt-42.p.rapidapi.com"
     }
 

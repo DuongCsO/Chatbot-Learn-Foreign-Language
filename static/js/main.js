@@ -1,6 +1,6 @@
 $.getScript("/static/js/common.js");
 
-$(document).ready(() => {
+$(document).ready( async () => {
 
     let message_counter = 1;
 function addMessage(sender, message) {
@@ -9,7 +9,7 @@ function addMessage(sender, message) {
         html = `<div class="post post-user">${message + timeStamp()}</span></div>`;
         $("#message-board").append(html);
     } else {
-        playAudio(message,message_counter);
+        // playAudio(message,message_counter);
         let translate_icons = `<i class="fa-solid fa-language translate-icons"></i>`;
 		let audioButton = `<i class="fa-solid fa-file-audio speak-icons"></i>`;
         html = `
